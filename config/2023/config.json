@@ -5,43 +5,8 @@
   "sections": [
     {
       "name": "Prematch",
-      "preserveDataOnReset": true,
+      "preserveDataOnReset": false,
       "fields": [
-        {
-          "title": "Scouter Initials",
-          "type": "text",
-          "required": true,
-          "code": "scouter"
-        },
-        {
-          "title": "Match Number",
-          "type": "number",
-          "required": true,
-          "min": 0,
-          "code": "matchNumber"
-        },
-        {
-          "title": "Robot",
-          "type": "select",
-          "required": true,
-          "code": "robot",
-          "choices": {
-            "r1": "Red 1",
-            "b1": "Blue 1",
-            "r2": "Red 2",
-            "b2": "Blue 2",
-            "r3": "Red 3",
-            "b3": "Blue 3"
-          },
-          "defaultValue": "r1"
-        },
-        {
-          "title": "Team Number",
-          "type": "number",
-          "required": true,
-          "min": 0,
-          "code": "teamNumber"
-        },
         {
           "title": "No Show",
           "type": "boolean",

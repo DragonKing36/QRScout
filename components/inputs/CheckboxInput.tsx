@@ -19,6 +19,7 @@ export default function Checkbox(data: BoolInputProps) {
         id={data.title}
         onChange={handleChange}
         checked={data.value}
+        disabled={data.disabled}
       />
     </div>
   )

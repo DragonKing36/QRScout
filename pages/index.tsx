@@ -9,6 +9,8 @@ import {
 import QRModal from '../components/QRModal'
 import Section from '../components/Section'
 import Button, { Variant } from '../components/core/Button'
+import Modal from 'react-bootstrap/Modal'
+import { Scanner, outline, useDevices } from '@yudiel/react-qr-scanner'
 
 function buildConfig(c: Config) {
   let config: Config = { ...c }
@@ -23,11 +25,93 @@ function getDefaultConfig(): Config {
   return buildConfig(configJson as Config)
 }
 
+function createMetadataSection(
+  scouter = '',
+  matchNumber: number | null = null,
+  robot: string | null = null,
+  teamNumber: number | null = null
+): SectionProps {
+  return {
+    name: 'Metadata',
+    preserveDataOnReset: true,
+    fields: [
+      {
+        title: 'Scouter Name/Initials',
+        type: 'text',
+        required: true,
+        code: 'scouter',
+        value: scouter,
+        disabled: scouter != '',
+      },
+      {
+        title: 'Match Number',
+        type: 'number',
+        required: true,
+        min: 0,
+        code: 'matchNumber',
+        value: matchNumber,
+        disabled: matchNumber != null,
+      },
+      {
+        title: 'Robot',
+        type: 'select',
+        required: true,
+        code: 'robot',
+        choices: {
+          r1: 'Red 1',
+          b1: 'Blue 1',
+          r2: 'Red 2',
+          b2: 'Blue 2',
+          r3: 'Red 3',
+          b3: 'Blue 3',
+        },
+        defaultValue: 'r1',
+        value: robot,
+        disabled: robot != null,
+      },
+      {
+        title: 'Team Number',
+        type: 'number',
+        required: true,
+        min: 0,
+        code: 'teamNumber',
+        value: teamNumber,
+        disabled: teamNumber != null,
+      },
+    ],
+  }
+}
+
+interface LeaderData {
+  name: string
+  matchNumber: number
+  teamNumber: number
+  fmsRobot: string
+}
+
 export default function Home() {
-  const [formData, setFormData] = useState<Config>(getDefaultConfig)
+  const [formData, setFormData] = useState(getDefaultConfig())
   const [showQR, setShowQR] = useState(false)
 
-  useEffect(() => { 
+  const [showScanFromLeader, setShowScanFromLeader] = useState(true)
+  const [showScanConfirmation, setShowScanConfirmation] = useState(false)
+  const [deviceId, setDeviceId] = useState<string | undefined>(undefined)
+  const [devices, setDevices] = useState(useDevices())
+  const refreshDevices = () =>
+    (async () => {
+      try {
+        const mediaDevices = await navigator.mediaDevices.enumerateDevices()
+        const devices = mediaDevices.filter(({ kind }) => kind === 'videoinput')
+        if (devices.length > 0) {
+          setDevices(devices)
+        }
+      } catch (e) {
+        console.error(e)
+      }
+    })()
+  const [leaderData, setLeaderData] = useState<LeaderData | null>(null)
+
+  useEffect(() => {
     let userConfig = localStorage.getItem('QRScoutUserConfig')
     if (userConfig) {
       setFormData(buildConfig(JSON.parse(userConfig) as Config))
@@ -43,7 +127,11 @@ export default function Home() {
       let field = section.fields.find((f) => f.code === code)
       if (field) {
         field.value = data
+      } else {
+        console.error("Couldn't find field " + code)
       }
+    } else {
+      console.error("Couldn't find section " + sectionName)
     }
     setFormData(currentData)
   }
@@ -221,6 +309,157 @@ export default function Home() {
           </a>
         </div>
       </footer>
+
+      <Modal show={showScanFromLeader}>
+        <Modal.Header>
+          <Modal.Title>Scan from leader</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <p>Please scan the QR code provided by the scouting leader.</p>
+          <select onChange={(e) => setDeviceId(e.target.value)}>
+            <option value={undefined}>Select camera</option>
+            {devices.map((device, index) => (
+              <option key={index} value={device.deviceId}>
+                {device.label}
+              </option>
+            ))}
+          </select>
+          <Button variant={Variant.Primary} onClick={refreshDevices}>
+            Refresh cameras
+          </Button>
+          <Scanner
+            onScan={(detectedCodes) => {
+              if (
+                showScanConfirmation ||
+                !showScanFromLeader ||
+                leaderData != null
+              )
+                return
+              for (const code of detectedCodes) {
+                try {
+                  const newLeaderData = JSON.parse(code.rawValue) as LeaderData
+                  if (
+                    'name' in newLeaderData &&
+                    'matchNumber' in newLeaderData &&
+                    'teamNumber' in newLeaderData &&
+                    'fmsRobot' in newLeaderData
+                  ) {
+                    if (
+                      showScanConfirmation ||
+                      !showScanFromLeader ||
+                      leaderData != null
+                    )
+                      break
+                    setLeaderData(newLeaderData)
+                    setShowScanConfirmation(true)
+                    break
+                  }
+                } catch (e) {}
+              }
+            }}
+            constraints={{
+              deviceId,
+            }}
+            components={{
+              tracker: outline,
+              finder: false,
+              audio: false,
+            }}
+            paused={!showScanFromLeader}
+            allowMultiple={true}
+            scanDelay={500}
+          />
+        </Modal.Body>
+        <Modal.Footer>
+          <Button
+            variant={Variant.Danger}
+            onClick={() => {
+              setShowScanFromLeader(false)
+
+              const newData = { ...formData }
+              newData.sections = [
+                createMetadataSection(),
+                ...formData.sections.filter(
+                  (section) => section.name != 'Metadata'
+                ),
+              ]
+              setFormData(newData)
+            }}
+          >
+            Manual scouting
+          </Button>
+        </Modal.Footer>
+      </Modal>
+
+      <Modal show={showScanConfirmation && showScanFromLeader}>
+        <Modal.Header>
+          <Modal.Title>Is this correct?</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <p>Name: {leaderData?.name}</p>
+          <p>Match Number: {leaderData?.matchNumber}</p>
+          <p>Team Number: {leaderData?.teamNumber}</p>
+          <p>Robot: {leaderData?.fmsRobot}</p>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button
+            variant={Variant.Primary}
+            onClick={() => {
+              setShowScanConfirmation(false)
+              // Sometimes this modal can show when the scan from leader modal is not showing. Ignore button presses if this happens
+              if (!showScanFromLeader) {
+                console.log("ignoring yes")
+                return
+              }
+              setShowScanFromLeader(false)
+
+              let robot = ''
+              if (leaderData?.fmsRobot.toLowerCase().includes('red')) {
+                robot += 'r'
+              } else {
+                robot += 'b'
+              }
+              if (leaderData?.fmsRobot.toLowerCase().includes('1')) {
+                robot += '1'
+              } else if (leaderData?.fmsRobot.toLowerCase().includes('2')) {
+                robot += '2'
+              } else {
+                robot += '3'
+              }
+
+              const newData = { ...formData }
+              newData.sections = [
+                createMetadataSection(
+                  leaderData?.name,
+                  leaderData?.matchNumber,
+                  robot,
+                  leaderData?.teamNumber
+                ),
+                ...formData.sections.filter(
+                  (section) => section.name != 'Metadata'
+                ),
+              ]
+              setFormData(newData)
+            }}
+          >
+            Yes
+          </Button>
+          <Button
+            variant={Variant.Secondary}
+            onClick={() => {
+              setShowScanConfirmation(false)
+              // Sometimes this modal can show when the scan from leader modal is not showing. Ignore button presses if this happens
+              if (!showScanFromLeader)  {
+                console.log("ignoring no")
+                return
+              }
+              setLeaderData(null)
+            }}
+          >
+            No
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   )
 }

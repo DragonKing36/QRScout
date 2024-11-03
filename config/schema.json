@@ -72,7 +72,7 @@
         },
         "max": {
           "type": "number"
-        }
+        },
       },
       "required": ["title", "type", "required", "code"],
       "additionalProperties": false

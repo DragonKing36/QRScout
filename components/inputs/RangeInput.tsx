@@ -13,9 +13,10 @@ export default function RangeInput(data: BaseInputProps) {
       type="range"
       min={data.min}
       max={data.max}
-      defaultValue={data.defaultValue}
+      defaultValue={data.value}
       id={data.title}
       onChange={handleChange}
+      disabled={data.disabled}
     />
   )
 }

@@ -18,6 +18,7 @@ export default function SelectInput(data: SelectInputProps) {
       id={data.title}
       onChange={handleSelect}
       value={data.value}
+      disabled={data.disabled}
     >
       {Object.keys(data.options).map((o) => {
         return (

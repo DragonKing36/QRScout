@@ -29,6 +29,7 @@ export default function CounterInput(data: CounterInputProps) {
         className="focus:shadow-outline w-8 rounded bg-gray-500 text-2xl text-white hover:bg-red-700 focus:outline-none"
         type="button"
         onClick={() => handleChange(-(data.step || 1))}
+        disabled={data.disabled}
       >
         -
       </button>
@@ -37,6 +38,7 @@ export default function CounterInput(data: CounterInputProps) {
         className="focus:shadow-outline w-8 rounded bg-gray-500 text-2xl  text-white hover:bg-red-700 focus:outline-none"
         type="button"
         onClick={() => handleChange(data.step || 1)}
+        disabled={data.disabled}
       >
         +
       </button>
