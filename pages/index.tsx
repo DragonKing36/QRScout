@@ -39,13 +39,13 @@ function createMetadataSection(
         title: 'Scouting Type',
         type: 'select',
         required: true,
-        code: 'basic',
+        code: 'generic',
         choices: {
           S: 'Subjective',
         },
          defaultValue: 'S',
-         value: basic,
-         disabled: basic = 's'
+         value: generic,
+         disabled: generic != ''
        },
       {
         title: 'Scouter Name/Initials',
