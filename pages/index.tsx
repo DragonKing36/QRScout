@@ -45,7 +45,7 @@ function createMetadataSection(
         },
          defaultValue: 'S',
          value: generic,
-         disabled: generic != ''
+         disabled: generic != '',
        },
       {
         title: 'Scouter Name/Initials',
