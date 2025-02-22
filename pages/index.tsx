@@ -26,31 +26,16 @@ function getDefaultConfig(): Config {
 }
 
 function createMetadataSection(
-  basic: = string,
-  scouter: = string,
-  matchNumber: number,
-  allegience: string,
-  grouping: string,
-  teamNumber1: number,
-  teamNumber2: number,
-  teamNumber3: number
+  scouter = '',
+  matchNumber: number | null = null,
+  robot: string | null = null,
+  teamNumber: number | null = null
 ): SectionProps {
   return {
     name: 'Metadata',
     preserveDataOnReset: true,
     fields: [
       {
-        title: 'Scouting Type',
-        type: 'select',
-        required: true,
-        code: 'basic',
-        choices: {
-          S: 'Subjective',
-        },
-        value: basic,
-        disabled: basic != '',
-      },
-        {
         title: 'Scouter Name/Initials',
         type: 'text',
         required: true,
@@ -67,57 +52,31 @@ function createMetadataSection(
         value: matchNumber,
         disabled: matchNumber != null,
       },
-       {
-        title: 'Team Member Of',
+      {
+        title: 'Robot',
         type: 'select',
         required: true,
-        code: 'allegience',
+        code: 'robot',
         choices: {
-          997: 'Team 997',
-          995: 'Team 955',
-          749: 'Team 749',
+          r1: 'Red 1',
+          b1: 'Blue 1',
+          r2: 'Red 2',
+          b2: 'Blue 2',
+          r3: 'Red 3',
+          b3: 'Blue 3',
         },
-       },
-      {
-        title: 'Alliance',
-        type: 'select',
-        required: true,
-        code: 'grouping',
-        choices: {
-          R: 'Red',
-          B: 'Blue',
-        },
-      },
-        defaultValue: 'R',
-        value: grouping,
-        disabled: grouping != null,
+        defaultValue: 'r1',
+        value: robot,
+        disabled: robot != null,
       },
       {
-        title: 'Team Number One',
+        title: 'Team Number',
         type: 'number',
         required: true,
         min: 0,
-        code: 'teamNumber1',
-        value: teamNumber1,
-        disabled: teamNumber1 != null,
-      },
-       {
-        title: 'Team Number Two',
-        type: 'number',
-        required: true,
-        min: 0,
-        code: 'teamNumber2',
-        value: teamNumber2,
-        disabled: teamNumber2 != null,
-      },
-       {
-        title: 'Team Number Three',
-        type: 'number',
-        required: true,
-        min: 0,
-        code: 'teamNumber3',
-        value: teamNumber3,
-        disabled: teamNumber3 != null,
+        code: 'teamNumber',
+        value: teamNumber,
+        disabled: teamNumber != null,
       },
     ],
   }
