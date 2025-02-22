@@ -43,6 +43,7 @@ function createMetadataSection(
         choices: {
           S: 'Subjective',
         },
+       },
       {
         title: 'Scouter Name/Initials',
         type: 'text',
@@ -70,6 +71,7 @@ function createMetadataSection(
           995: 'Team 955',
           749: 'Team 749',
         },
+       },
       {
         title: 'Alliance',
         type: 'select',
@@ -79,6 +81,7 @@ function createMetadataSection(
           R: 'Red',
           B: 'Blue',
         },
+      }.
         defaultValue: 'R',
         value: grouping,
         disabled: grouping != null,
