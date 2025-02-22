@@ -40,7 +40,7 @@ function createMetadataSection(
     preserveDataOnReset: true,
     fields: [
       {
-        title: 'Team Member Of',
+        title: 'Scouting Type',
         type: 'select',
         required: true,
         code: 'basic',
