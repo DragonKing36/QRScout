@@ -26,8 +26,8 @@ function getDefaultConfig(): Config {
 }
 
 function createMetadataSection(
-  basic = string | null=null,
-  scouter = '',
+  basic: = string | null=null,
+  scouter: = '',
   matchNumber: number | null = null,
   allegience: number | null=null,
   grouping: string | null = null,
