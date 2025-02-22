@@ -26,14 +26,14 @@ function getDefaultConfig(): Config {
 }
 
 function createMetadataSection(
-  basic: = string | null=null,
-  scouter: = '',
-  matchNumber: number | null = null,
-  allegience: number | null=null,
-  grouping: string | null = null,
-  teamNumber1: number | null = null,
-  teamNumber2: number | null = null,
-  teamNumber3: number | null = null
+  basic: = string,
+  scouter: = string,
+  matchNumber: number,
+  allegience: string,
+  grouping: string,
+  teamNumber1: number,
+  teamNumber2: number,
+  teamNumber3: number
 ): SectionProps {
   return {
     name: 'Metadata',
