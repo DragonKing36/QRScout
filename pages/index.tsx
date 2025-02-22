@@ -26,15 +26,30 @@ function getDefaultConfig(): Config {
 }
 
 function createMetadataSection(
+  basic = string | null=null,
   scouter = '',
   matchNumber: number | null = null,
-  robot: string | null = null,
-  teamNumber: number | null = null
+  allegience: number | null=null,
+  grouping: string | null = null,
+  teamNumber1: number | null = null,
+  teamNumber2: number | null = null,
+  teamNumber3: number | null = null
 ): SectionProps {
   return {
     name: 'Metadata',
     preserveDataOnReset: true,
     fields: [
+      {
+        title: 'Team Member Of',
+        type: 'select',
+        required: true,
+        code: 'basic',
+        choices: {
+          S: 'Subjective',
+        },
+        value: basic,
+        disabled: basic != '',
+      },
         {
         title: 'Scouter Name/Initials',
         type: 'text',
