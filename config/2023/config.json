@@ -77,7 +77,7 @@
           "title": "Scouter Initials",
           "description": "Enter the initials of the scouter.",
           "type": "text",
-          "required": true,
+          "required": false,
           "code": "scouter",
           "formResetBehavior": "preserve",
           "defaultValue": ""
@@ -86,7 +86,7 @@
           "title": "Match Number",
           "description": "Enter the match number.",
           "type": "number",
-          "required": true,
+          "required": false,
           "code": "matchNumber",
           "formResetBehavior": "increment",
           "defaultValue": 1
