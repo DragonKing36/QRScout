@@ -95,7 +95,7 @@
           "title": "Team Member of",
           "description": "Team 997, Team 955, and Team 749 are going to scout together. As a result, it is necessary to state which team you are associated with.",
           "type": "select",
-          "required": true,
+          "required": false,
           "code": "grouping",
           "formResetBehavior": "preserve",
           "defaultValue": "",
