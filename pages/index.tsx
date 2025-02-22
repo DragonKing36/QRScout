@@ -32,100 +32,54 @@ function createMetadataSection(
   teamNumber: number | null = null
 ): SectionProps {
   return {
-      "name": "Prematch",
-      "fields": [
-        {
-          "title": "Data Type",
-          "description": "The Type of Data you are scouting.",
-          "type": "select",
-          "required": true,
-          "code": "basic",
-          "formResetBehavior": "preserve",
-          "defaultValue": "S",
-          "choices": {
-            "S": "Subjective"
-          }
+    name: 'Metadata',
+    preserveDataOnReset: true,
+    fields: [
+      {
+        title: 'Scouter Name/Initials',
+        type: 'text',
+        required: true,
+        code: 'scouter',
+        value: scouter,
+        disabled: scouter != '',
+      },
+      {
+        title: 'Match Number',
+        type: 'number',
+        required: true,
+        min: 0,
+        code: 'matchNumber',
+        value: matchNumber,
+        disabled: matchNumber != null,
+      },
+      {
+        title: 'Robot',
+        type: 'select',
+        required: true,
+        code: 'robot',
+        choices: {
+          r1: 'Red 1',
+          b1: 'Blue 1',
+          r2: 'Red 2',
+          b2: 'Blue 2',
+          r3: 'Red 3',
+          b3: 'Blue 3',
         },
-        {
-          "title": "Scouter Initials",
-          "description": "Enter the initials of the scouter.",
-          "type": "text",
-          "required": true,
-          "code": "scouter",
-          "formResetBehavior": "preserve",
-          "defaultValue": ""
-        },
-        {
-          "title": "Match Number",
-          "description": "Enter the match number.",
-          "type": "number",
-          "required": true,
-          "code": "matchNumber",
-          "formResetBehavior": "increment",
-          "defaultValue": 1
-        },
-        {
-          "title": "Team Member of",
-          "description": "Team 997, Team 955, and Team 749 are going to scout together. As a result, it is necessary to state which team you are associated with.",
-          "type": "select",
-          "required": true,
-          "code": "grouping",
-          "formResetBehavior": "preserve",
-          "defaultValue": "",
-          "choices": {
-            "749": "Team 749",
-            "955": "Team 955",
-            "997": "Team 997"
-          }
-        },
-        {
-          "title": "Alliance",
-          "description": "The Alliance you are scouting this match, based on color.",
-          "type": "select",
-          "required": true,
-          "code": "robot",
-          "formResetBehavior": "preserve",
-          "defaultValue": "R",
-          "choices": {
-            "R": "Red",
-            "B": "Blue"
-          }
-        },
-        {
-          "title": "Team Number One",
-          "description": "The team number of the first robot in the alliance you are scouting.",
-          "type": "number",
-          "required": true,
-          "code": "teamNumber1",
-          "formResetBehavior": "reset",
-          "defaultValue": 0,
-          "min": 0,
-          "max": 19999
-        },
-        {
-          "title": "Team Number Two",
-          "description": "The team number of the second robot in the alliance you are scouting.",
-          "type": "number",
-          "required": true,
-          "code": "teamNumber2",
-          "formResetBehavior": "reset",
-          "defaultValue": 0,
-          "min": 0,
-          "max": 19999
-        },
-        {
-          "title": "Team Number Three",
-          "description": "The team number of the third robot in the alliance you are scouting.",
-          "type": "number",
-          "required": true,
-          "code": "teamNumber3",
-          "formResetBehavior": "reset",
-          "defaultValue": 0,
-          "min": 0,
-          "max": 19999
-        }
-      ]
-    }
+        defaultValue: 'r1',
+        value: robot,
+        disabled: robot != null,
+      },
+      {
+        title: 'Team Number',
+        type: 'number',
+        required: true,
+        min: 0,
+        code: 'teamNumber',
+        value: teamNumber,
+        disabled: teamNumber != null,
+      },
+    ],
+  }
 }
 
 interface LeaderData {
