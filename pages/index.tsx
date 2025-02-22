@@ -26,6 +26,7 @@ function getDefaultConfig(): Config {
 }
 
 function createMetadataSection(
+  generic: string | null=null,
   scouter = '',
   matchNumber: number | null = null,
   robot: string | null = null,
@@ -35,6 +36,23 @@ function createMetadataSection(
     name: 'Metadata',
     preserveDataOnReset: true,
     fields: [
+      {
+        title: 'Scouting Type',
+        type: 'select',
+        required: true,
+        code: 'generic',
+        choices: {
+          r1: 'Red 1',
+          b1: 'Blue 1',
+          r2: 'Red 2',
+          b2: 'Blue 2',
+          r3: 'Red 3',
+          b3: 'Blue 3',
+        },
+        defaultValue: 'r1',
+        value: generic,
+        disabled: generic != null,
+      },
       {
         title: 'Scouter Name/Initials',
         type: 'text',
