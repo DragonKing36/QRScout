@@ -98,7 +98,7 @@
           "required": false,
           "code": "grouping",
           "formResetBehavior": "preserve",
-          "defaultValue": "",
+          "defaultValue": "997",
           "choices": {
             "749": "Team 749",
             "955": "Team 955",
