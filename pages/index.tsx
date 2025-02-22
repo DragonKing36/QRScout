@@ -43,6 +43,9 @@ function createMetadataSection(
         choices: {
           S: 'Subjective',
         },
+         defaultValue: 'S',
+         value: basic,
+         disabled: basic = 's'
        },
       {
         title: 'Scouter Name/Initials',
@@ -81,7 +84,7 @@ function createMetadataSection(
           R: 'Red',
           B: 'Blue',
         },
-      }.
+      },
         defaultValue: 'R',
         value: grouping,
         disabled: grouping != null,
