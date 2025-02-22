@@ -378,6 +378,7 @@ export default function Home() {
 
               const newData = { ...formData }
               newData.sections = [
+                createMetadataSection(),
                 ...formData.sections.filter(
                   (section) => section.name != 'Metadata'
                 ),
@@ -428,6 +429,12 @@ export default function Home() {
 
               const newData = { ...formData }
               newData.sections = [
+                createMetadataSection(
+                  leaderData?.name,
+                  leaderData?.matchNumber,
+                  robot,
+                  leaderData?.teamNumber
+                ),
                 ...formData.sections.filter(
                   (section) => section.name != 'Metadata'
                 ),
