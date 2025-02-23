@@ -26,7 +26,6 @@ function getDefaultConfig(): Config {
 }
 
 function createMetadataSection(
-  generic: string | null=null,
   scouter = '',
   matchNumber: number | null = null,
   robot: string | null = null,
@@ -36,18 +35,6 @@ function createMetadataSection(
     name: 'Metadata',
     preserveDataOnReset: true,
     fields: [
-      {
-        title: 'Scouting Type',
-        type: 'select',
-        required: true,
-        code: 'generic',
-        choices: {
-          S: 'Subjective',
-        },
-        defaultValue: 'S',
-        value: generic,
-        disabled: generic != null,
-      },
       {
         title: 'Scouter Name/Initials',
         type: 'text',
@@ -442,6 +429,12 @@ export default function Home() {
 
               const newData = { ...formData }
               newData.sections = [
+                createMetadataSection(
+                  leaderData?.name,
+                  leaderData?.matchNumber,
+                  robot,
+                  leaderData?.teamNumber
+                ),
                 ...formData.sections.filter(
                   (section) => section.name != 'Metadata'
                 ),
