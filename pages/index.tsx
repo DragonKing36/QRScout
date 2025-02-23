@@ -42,14 +42,9 @@ function createMetadataSection(
         required: true,
         code: 'generic',
         choices: {
-          r1: 'Red 1',
-          b1: 'Blue 1',
-          r2: 'Red 2',
-          b2: 'Blue 2',
-          r3: 'Red 3',
-          b3: 'Blue 3',
+          S: 'Subjective',
         },
-        defaultValue: 'r1',
+        defaultValue: 'S',
         value: generic,
         disabled: generic != null,
       },
@@ -447,12 +442,6 @@ export default function Home() {
 
               const newData = { ...formData }
               newData.sections = [
-                createMetadataSection(
-                  leaderData?.name,
-                  leaderData?.matchNumber,
-                  robot,
-                  leaderData?.teamNumber
-                ),
                 ...formData.sections.filter(
                   (section) => section.name != 'Metadata'
                 ),
