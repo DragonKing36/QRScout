@@ -47,7 +47,7 @@ function createMetadataSection(
         choices: {
           S: 'Subjective',
         },
-        defaultValue: 'r1',
+        defaultValue: 'S',
         value: basic,
         disabled: basic != null,
       },
