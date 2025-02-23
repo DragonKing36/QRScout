@@ -27,7 +27,7 @@ function getDefaultConfig(): Config {
 
 function createMetadataSection(
   basic: string | null = null,
-  scouter = string | null = null,
+  scouter: string | null = null,
   matchNumber: number | null = null,
   robot: string | null = null,
   group: string | null = null,
