@@ -26,15 +26,31 @@ function getDefaultConfig(): Config {
 }
 
 function createMetadataSection(
-  scouter = '',
+  basic: string | null = null,
+  scouter = string | null = null,
   matchNumber: number | null = null,
   robot: string | null = null,
-  teamNumber: number | null = null
+  group: string | null = null,
+  teamNumber1: number | null = null,
+  teamNumber2: number | null = null,
+  teamNumber3: number | null = null
 ): SectionProps {
   return {
     name: 'Metadata',
     preserveDataOnReset: true,
     fields: [
+       {
+        title: 'Data Type',
+        type: 'select',
+        required: true,
+        code: 'basic',
+        choices: {
+          S: 'Subjective',
+        },
+        defaultValue: 'r1',
+        value: basic,
+        disabled: basic != null,
+      },
       {
         title: 'Scouter Name/Initials',
         type: 'text',
@@ -53,30 +69,58 @@ function createMetadataSection(
         disabled: matchNumber != null,
       },
       {
-        title: 'Robot',
+        title: 'Member of team',
+        type: 'select',
+        required: true,
+        code: 'group',
+        choices: {
+          997: '997',
+          955: '955',
+          749: '749',
+        },
+        defaultValue: '997',
+        value: group,
+        disabled: group != null,
+      },
+      {
+        title: 'Alliance',
         type: 'select',
         required: true,
         code: 'robot',
         choices: {
-          r1: 'Red 1',
-          b1: 'Blue 1',
-          r2: 'Red 2',
-          b2: 'Blue 2',
-          r3: 'Red 3',
-          b3: 'Blue 3',
+          R: 'Red',
+          B: 'Blue',
         },
-        defaultValue: 'r1',
+        defaultValue: 'R',
         value: robot,
         disabled: robot != null,
       },
       {
-        title: 'Team Number',
+        title: 'Team Number One',
         type: 'number',
         required: true,
         min: 0,
-        code: 'teamNumber',
-        value: teamNumber,
-        disabled: teamNumber != null,
+        code: 'teamNumber1',
+        value: teamNumber1,
+        disabled: teamNumber1 != null,
+      },
+       {
+        title: 'Team Number Two',
+        type: 'number',
+        required: true,
+        min: 0,
+        code: 'teamNumber2',
+        value: teamNumber2,
+        disabled: teamNumber2 != null,
+      },
+       {
+        title: 'Team Number Three',
+        type: 'number',
+        required: true,
+        min: 0,
+        code: 'teamNumber3',
+        value: teamNumber3,
+        disabled: teamNumber3 != null,
       },
     ],
   }
@@ -430,10 +474,15 @@ export default function Home() {
               const newData = { ...formData }
               newData.sections = [
                 createMetadataSection(
+                  leaderData?.basic,
+                  leaderData?.scouter,
                   leaderData?.name,
                   leaderData?.matchNumber,
-                  robot,
-                  leaderData?.teamNumber
+                  leaderData?.robot,
+                  leaderData?.group,
+                  leaderData?.teamNumber1,
+                  leaderData?.teamNumber2,
+                  leaderData?.teamNumber3,
                 ),
                 ...formData.sections.filter(
                   (section) => section.name != 'Metadata'
