@@ -36,7 +36,7 @@ function createMetadataSection(
     preserveDataOnReset: true,
     fields: [
       {
-        title: 'Scouter Name/Initials',
+        title: 'Scouter ID',
         type: 'text',
         required: true,
         code: 'scouter',
