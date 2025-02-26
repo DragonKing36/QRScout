@@ -30,7 +30,9 @@ function createMetadataSection(
   scouter = '',
   matchNumber: number | null = null,
   robot: string | null = null,
-  teamNumber: number | null = null
+  teamNumber1: number | null = null,
+  teamNumber2: number | null = null,
+  teamNumber3: number | null = null
 ): SectionProps {
   return {
     name: 'Metadata',
@@ -83,9 +85,27 @@ function createMetadataSection(
         type: 'number',
         required: true,
         min: 0,
-        code: 'teamNumber',
-        value: teamNumber,
-        disabled: teamNumber != null,
+        code: 'teamNumber1',
+        value: teamNumber1,
+        disabled: teamNumber1 != null,
+      },
+       {
+        title: 'Team Number',
+        type: 'number',
+        required: true,
+        min: 0,
+        code: 'teamNumber2',
+        value: teamNumber2,
+        disabled: teamNumber2 != null,
+      },
+       {
+        title: 'Team Number',
+        type: 'number',
+        required: true,
+        min: 0,
+        code: 'teamNumber3',
+        value: teamNumber3,
+        disabled: teamNumber3 != null,
       },
     ],
   }
@@ -95,7 +115,9 @@ interface LeaderData {
   basic: string
   name: string
   matchNumber: number
-  teamNumber: number
+  teamNumber1: number
+  teamNumber2: number
+  teamNumber3: number
   fmsRobot: string
 }
 
@@ -444,7 +466,9 @@ export default function Home() {
                   leaderData?.name,
                   leaderData?.matchNumber,
                   robot,
-                  leaderData?.teamNumber 
+                  leaderData?.teamNumber1,
+                  leaderData?.teamNumber2,
+                  leaderData?.teamNumber3,
                 ),
                 ...formData.sections.filter(
                   (section) => section.name != 'Metadata'
