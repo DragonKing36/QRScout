@@ -26,32 +26,17 @@ function getDefaultConfig(): Config {
 }
 
 function createMetadataSection(
-  basic: string,
-  scouter: string | null = null,
+  scouter = '',
   matchNumber: number | null = null,
   robot: string | null = null,
-  teamNumber1: number | null = null,
-  teamNumber2: number | null = null,
-  teamNumber3: number | null = null
+  teamNumber: number | null = null
 ): SectionProps {
   return {
     name: 'Metadata',
     preserveDataOnReset: true,
     fields: [
-       {
-        title: 'Data Type',
-        type: 'select',
-        required: true,
-        code: 'basic',
-        choices: {
-          S: 'Subjective',
-        },
-        defaultValue: 'S',
-        value: basic,
-        disabled: basic != null,
-      },
       {
-        title: 'Scouter ID',
+        title: 'Scouter Name/Initials',
         type: 'text',
         required: true,
         code: 'scouter',
@@ -68,57 +53,39 @@ function createMetadataSection(
         disabled: matchNumber != null,
       },
       {
-        title: 'Alliance',
+        title: 'Robot',
         type: 'select',
         required: true,
         code: 'robot',
         choices: {
-          R: 'Red',
-          B: 'Blue',
+          r1: 'Red 1',
+          b1: 'Blue 1',
+          r2: 'Red 2',
+          b2: 'Blue 2',
+          r3: 'Red 3',
+          b3: 'Blue 3',
         },
-        defaultValue: 'R',
+        defaultValue: 'r1',
         value: robot,
         disabled: robot != null,
       },
       {
-        title: 'Team Number One',
+        title: 'Team Number',
         type: 'number',
         required: true,
         min: 0,
-        code: 'teamNumber1',
-        value: teamNumber1,
-        disabled: teamNumber1 != null,
-      },
-       {
-        title: 'Team Number Two',
-        type: 'number',
-        required: true,
-        min: 0,
-        code: 'teamNumber2',
-        value: teamNumber2,
-        disabled: teamNumber2 != null,
-      },
-       {
-        title: 'Team Number Three',
-        type: 'number',
-        required: true,
-        min: 0,
-        code: 'teamNumber3',
-        value: teamNumber3,
-        disabled: teamNumber3 != null,
+        code: 'teamNumber',
+        value: teamNumber,
+        disabled: teamNumber != null,
       },
     ],
   }
 }
 
 interface LeaderData {
-  scouter: string
-  basic: string
   name: string
   matchNumber: number
-  teamNumber1: number
-  teamNumber2: number
-  teamNumber3: number
+  teamNumber: number
   fmsRobot: string
 }
 
@@ -372,13 +339,9 @@ export default function Home() {
                 try {
                   const newLeaderData = JSON.parse(code.rawValue) as LeaderData
                   if (
-                    
-                    'basic' in newLeaderData &&
-                    'scouter' in newLeaderData &&
+                    'name' in newLeaderData &&
                     'matchNumber' in newLeaderData &&
-                    'teamNumber1' in newLeaderData &&
-                    'teamNumber2' in newLeaderData &&
-                    'teamNumber3' in newLeaderData &&
+                    'teamNumber' in newLeaderData &&
                     'fmsRobot' in newLeaderData
                   ) {
                     if (
@@ -433,13 +396,9 @@ export default function Home() {
           <Modal.Title>Is this correct?</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <p>Basic: {leaderData.basic}</p>
           <p>Name: {leaderData?.name}</p>
-          <p>Scouter: {leaderData?.scouter}</p>
           <p>Match Number: {leaderData?.matchNumber}</p>
-          <p>Team Number 1: {leaderData?.teamNumber1}</p>
-          <p>Team Number 2: {leaderData?.teamNumber2}</p>
-          <p>Team Number 3: {leaderData?.teamNumber3}</p>
+          <p>Team Number: {leaderData?.teamNumber}</p>
           <p>Robot: {leaderData?.fmsRobot}</p>
         </Modal.Body>
         <Modal.Footer>
@@ -471,14 +430,10 @@ export default function Home() {
               const newData = { ...formData }
               newData.sections = [
                 createMetadataSection(
-                  leaderData?.basic,
-                  leaderData?.scouter,
                   leaderData?.name,
                   leaderData?.matchNumber,
-                  leaderData?.fmsRobot,
-                  leaderData?.teamNumber1,
-                  leaderData?.teamNumber2,
-                  leaderData?.teamNumber3,
+                  robot,
+                  leaderData?.teamNumber
                 ),
                 ...formData.sections.filter(
                   (section) => section.name != 'Metadata'
