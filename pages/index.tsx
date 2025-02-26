@@ -442,7 +442,8 @@ export default function Home() {
                   leaderData?.name,
                   leaderData?.matchNumber,
                   robot,
-                  leaderData?.teamNumber
+                  leaderData?.teamNumber,
+                  leaderData?.basic
                 ),
                 ...formData.sections.filter(
                   (section) => section.name != 'Metadata'
