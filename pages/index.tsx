@@ -29,12 +29,25 @@ function createMetadataSection(
   scouter = '',
   matchNumber: number | null = null,
   robot: string | null = null,
+  basic: string | null = null,
   teamNumber: number | null = null
 ): SectionProps {
   return {
     name: 'Metadata',
     preserveDataOnReset: true,
     fields: [
+       {
+        title: 'Scouting Type',
+        type: 'select',
+        required: true,
+        code: 'basic',
+        choices: {
+          S: 'Subjective',
+        },
+        defaultValue: 'S',
+        value: basic,
+        disabled: basic != null,
+      },
       {
         title: 'Scouter ID',
         type: 'text',
