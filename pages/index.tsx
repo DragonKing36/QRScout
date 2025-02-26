@@ -92,6 +92,7 @@ function createMetadataSection(
 }
 
 interface LeaderData {
+  basic: string
   name: string
   matchNumber: number
   teamNumber: number
