@@ -30,7 +30,6 @@ function createMetadataSection(
   scouter: string | null = null,
   matchNumber: number | null = null,
   robot: string | null = null,
-  group: string | null = null,
   teamNumber1: number | null = null,
   teamNumber2: number | null = null,
   teamNumber3: number | null = null
@@ -52,7 +51,7 @@ function createMetadataSection(
         disabled: basic != null,
       },
       {
-        title: 'Scouter Name/Initials',
+        title: 'Scouter ID',
         type: 'text',
         required: true,
         code: 'scouter',
@@ -67,20 +66,6 @@ function createMetadataSection(
         code: 'matchNumber',
         value: matchNumber,
         disabled: matchNumber != null,
-      },
-      {
-        title: 'Member of team',
-        type: 'select',
-        required: true,
-        code: 'group',
-        choices: {
-          997: '997',
-          955: '955',
-          749: '749',
-        },
-        defaultValue: '997',
-        value: group,
-        disabled: group != null,
       },
       {
         title: 'Alliance',
@@ -474,12 +459,10 @@ export default function Home() {
               const newData = { ...formData }
               newData.sections = [
                 createMetadataSection(
-                  leaderData?.basic,
                   leaderData?.scouter,
                   leaderData?.name,
                   leaderData?.matchNumber,
                   leaderData?.robot,
-                  leaderData?.group,
                   leaderData?.teamNumber1,
                   leaderData?.teamNumber2,
                   leaderData?.teamNumber3,
