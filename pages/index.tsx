@@ -26,10 +26,10 @@ function getDefaultConfig(): Config {
 }
 
 function createMetadataSection(
+  basic: string | null = null,
   scouter = '',
   matchNumber: number | null = null,
   robot: string | null = null,
-  basic: string | null = null,
   teamNumber: number | null = null
 ): SectionProps {
   return {
@@ -439,11 +439,11 @@ export default function Home() {
               const newData = { ...formData }
               newData.sections = [
                 createMetadataSection(
+                  leaderData?.basic,
                   leaderData?.name,
                   leaderData?.matchNumber,
                   robot,
-                  leaderData?.teamNumber,
-                  leaderData?.basic
+                  leaderData?.teamNumber 
                 ),
                 ...formData.sections.filter(
                   (section) => section.name != 'Metadata'
