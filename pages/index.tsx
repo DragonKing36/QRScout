@@ -372,9 +372,13 @@ export default function Home() {
                 try {
                   const newLeaderData = JSON.parse(code.rawValue) as LeaderData
                   if (
-                    'name' in newLeaderData &&
+                    
+                    'basic' in newLeaderData &&
+                    'scouter' in newLeaderData &&
                     'matchNumber' in newLeaderData &&
-                    'teamNumber' in newLeaderData &&
+                    'teamNumber1' in newLeaderData &&
+                    'teamNumber2' in newLeaderData &&
+                    'teamNumber3' in newLeaderData &&
                     'fmsRobot' in newLeaderData
                   ) {
                     if (
