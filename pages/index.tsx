@@ -81,7 +81,7 @@ function createMetadataSection(
         disabled: robot != null,
       },
       {
-        title: 'Team Number',
+        title: 'Team Number One',
         type: 'number',
         required: true,
         min: 0,
@@ -90,7 +90,7 @@ function createMetadataSection(
         disabled: teamNumber1 != null,
       },
        {
-        title: 'Team Number',
+        title: 'Team Number Two',
         type: 'number',
         required: true,
         min: 0,
@@ -99,7 +99,7 @@ function createMetadataSection(
         disabled: teamNumber2 != null,
       },
        {
-        title: 'Team Number',
+        title: 'Team Number Three',
         type: 'number',
         required: true,
         min: 0,
