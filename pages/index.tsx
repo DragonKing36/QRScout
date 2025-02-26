@@ -112,9 +112,13 @@ function createMetadataSection(
 }
 
 interface LeaderData {
+  scouter: string
+  basic: string
   name: string
   matchNumber: number
-  teamNumber: number
+  teamNumber1: number
+  teamNumber2: number
+  teamNumber3: number
   fmsRobot: string
 }
 
@@ -459,10 +463,11 @@ export default function Home() {
               const newData = { ...formData }
               newData.sections = [
                 createMetadataSection(
+                  leaderData?.basic,
                   leaderData?.scouter,
                   leaderData?.name,
                   leaderData?.matchNumber,
-                  leaderData?.robot,
+                  leaderData?.fmsRobot,
                   leaderData?.teamNumber1,
                   leaderData?.teamNumber2,
                   leaderData?.teamNumber3,
