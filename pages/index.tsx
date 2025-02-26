@@ -429,13 +429,13 @@ export default function Home() {
           <Modal.Title>Is this correct?</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <p>Name: {leaderData.basic}</p>
+          <p>Basic: {leaderData.basic}</p>
           <p>Name: {leaderData?.name}</p>
-          <p>Name: {leaderData?.scouter}</p>
+          <p>Scouter: {leaderData?.scouter}</p>
           <p>Match Number: {leaderData?.matchNumber}</p>
-          <p>Team Number: {leaderData?.teamNumber1}</p>
-          <p>Team Number: {leaderData?.teamNumber2}</p>
-          <p>Team Number: {leaderData?.teamNumber3}</p>
+          <p>Team Number 1: {leaderData?.teamNumber1}</p>
+          <p>Team Number 2: {leaderData?.teamNumber2}</p>
+          <p>Team Number 3: {leaderData?.teamNumber3}</p>
           <p>Robot: {leaderData?.fmsRobot}</p>
         </Modal.Body>
         <Modal.Footer>
