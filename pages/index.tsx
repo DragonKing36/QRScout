@@ -48,7 +48,7 @@ function createMetadataSection(
         },
         defaultValue: 'S',
         value: basic,
-        disabled: basic != 'S',
+        disabled: basic != null,
       },
       {
         title: 'Scouter ID',
