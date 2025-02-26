@@ -41,7 +41,7 @@ function createMetadataSection(
        {
         title: 'Scouting Type',
         type: 'select',
-        required: true,
+        required: false,
         code: 'basic',
         choices: {
           S: 'Subjective',
