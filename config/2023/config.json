@@ -77,7 +77,7 @@
           "title": "Scouter Initials",
           "description": "Enter the initials of the scouter.",
           "type": "text",
-          "required": true,
+          "required": false,
           "code": "scouter",
           "formResetBehavior": "preserve",
           "defaultValue": ""
