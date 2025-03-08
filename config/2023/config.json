@@ -1,10 +1,10 @@
 {
   "$schema": "../schema.json",
   "title": "QRScout",
-  "page_title": "Crescendo",
+  "page_title": "Reefscape",
   "sections": [
     {
-      "name": "Prematch",
+      "name": "Team 1",
       "preserveDataOnReset": false,
       "fields": [
         {
@@ -17,7 +17,7 @@
       ]
     },
     {
-      "name": "Autonomous",
+      "name": "Team 2",
       "fields": [
         {
           "title": "Starting Location",
@@ -57,7 +57,7 @@
       ]
     },
     {
-      "name": "Teleop",
+      "name": "Team 3",
       "fields": [
         {
           "code": "tuq",
