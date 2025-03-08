@@ -1,354 +1,164 @@
 {
+  "$schema": "../schema.json",
   "title": "QRScout",
-  "page_title": "Reefscape",
-  "delimiter": "\t",
-  "teamNumber": 2713,
-  "theme": {
-    "light": {
-      "background": "0 0% 100%",
-      "foreground": "0 0% 3.9%",
-      "card": "0 0% 100%",
-      "card_foreground": "0 0% 3.9%",
-      "popover": "0 0% 100%",
-      "popover_foreground": "0 0% 3.9%",
-      "primary": "354.44 71.3% 47.9%",
-      "primary_foreground": "0 85.7% 97.3%",
-      "secondary": "0 0% 96.1%",
-      "secondary_foreground": "0 0% 9%",
-      "muted": "0 0% 96.1%",
-      "muted_foreground": "0 0% 45.1%",
-      "accent": "0 0% 96.1%",
-      "accent_foreground": "0 0% 9%",
-      "destructive": "0 84.2% 60.2%",
-      "destructive_foreground": "0 0% 98%",
-      "border": "0 0% 89.8%",
-      "input": "0 0% 89.8%",
-      "ring": "354.44 71.3% 47.9%",
-      "chart_1": "12 76% 61%",
-      "chart_2": "173 58% 39%",
-      "chart_3": "197 37% 24%",
-      "chart_4": "43 74% 66%",
-      "chart_5": "27 87% 67%"
-    },
-    "dark": {
-      "background": "0 0% 3.9%",
-      "foreground": "0 0% 98%",
-      "card": "0 0% 3.9%",
-      "card_foreground": "0 0% 98%",
-      "popover": "0 0% 3.9%",
-      "popover_foreground": "0 0% 98%",
-      "primary": "354.44 71.3% 47.9%",
-      "primary_foreground": "0 85.7% 97.3%",
-      "secondary": "0 0% 14.9%",
-      "secondary_foreground": "0 0% 98%",
-      "muted": "0 0% 14.9%",
-      "muted_foreground": "0 0% 63.9%",
-      "accent": "0 0% 14.9%",
-      "accent_foreground": "0 0% 98%",
-      "destructive": "0 62.8% 30.6%",
-      "destructive_foreground": "0 0% 98%",
-      "border": "0 0% 14.9%",
-      "input": "0 0% 14.9%",
-      "ring": "354.44 71.3% 47.9%",
-      "chart_1": "220 70% 50%",
-      "chart_2": "160 60% 45%",
-      "chart_3": "30 80% 55%",
-      "chart_4": "280 65% 60%",
-      "chart_5": "340 75% 55%"
-    }
-  },
+  "page_title": "Crescendo",
   "sections": [
     {
       "name": "Prematch",
+      "preserveDataOnReset": false,
       "fields": [
         {
-          "title": "Data Type",
-          "description": "The Type of Data you are scouting.",
+          "title": "No Show",
+          "type": "boolean",
+          "defaultValue": false,
+          "required": false,
+          "code": "noShow"
+        }
+      ]
+    },
+    {
+      "name": "Autonomous",
+      "fields": [
+        {
+          "title": "Starting Location",
           "type": "select",
-          "required": true,
-          "code": "basic",
-          "formResetBehavior": "preserve",
-          "defaultValue": "S",
           "choices": {
-            "S": "Subjective"
-          }
+            "left": "Left",
+            "middle": "Middle",
+            "right": "Right"
+          },
+          "defaultValue": "Left",
+          "required": false,
+          "code": "autoStart"
         },
         {
-          "title": "Scouter Initials",
-          "description": "Enter the initials of the scouter.",
+          "code": "at",
+          "title": "Leave",
+          "type": "boolean",
+          "defaultValue": false,
+          "required": false
+        },
+        {
+          "code": "tu",
+          "title": "Amp Note",
+          "type": "counter",
+          "defaultValue": 0,
+          "min": 0,
+          "required": false
+        },
+        {
+          "code": "tm",
+          "title": "Speaker Note",
+          "type": "counter",
+          "defaultValue": 0,
+          "min": 0,
+          "required": false
+        }
+      ]
+    },
+    {
+      "name": "Teleop",
+      "fields": [
+        {
+          "code": "tuq",
+          "title": "Speaker Note (Not Amplified)",
+          "type": "counter",
+          "defaultValue": 0,
+          "min": 0,
+          "required": false
+        },
+        {
+          "code": "tmu",
+          "title": "Speaker Note (Amplified)",
+          "type": "counter",
+          "defaultValue": 0,
+          "min": 0,
+          "required": false
+        },
+        {
+          "code": "tll",
+          "title": "Amp Note",
+          "type": "counter",
+          "defaultValue": 0,
+          "min": 0,
+          "required": false
+        }
+      ]
+    },
+    {
+      "name": "Endgame",
+      "fields": [
+        {
+          "code": "at",
+          "title": "Park",
+          "type": "boolean",
+          "defaultValue": false,
+          "required": false
+        },
+        {
+          "code": "ct",
+          "title": "Onstage (Not Spotlit)",
+          "type": "boolean",
+          "defaultValue": false,
+          "required": false
+        },
+        {
+          "code": "pt",
+          "title": "Onstage (Spotlit)",
+          "type": "boolean",
+          "defaultValue": false,
+          "required": false
+        },
+        {
+          "code": "ft",
+          "title": "Note Placed in Trap",
+          "type": "boolean",
+          "defaultValue": false,
+          "required": false
+        },
+        {
+          "code": "cn",
+          "title": "# of Robots in Harmony",
+          "type": "counter",
+          "defaultValue": 0,
+          "required": false,
+          "min": 0,
+          "max": 2
+        }
+      ]
+    },
+    {
+      "name": "Postmatch",
+      "fields": [
+        {
+          "code": "d",
+          "title": "Died",
+          "type": "boolean",
+          "defaultValue": false,
+          "required": false
+        },
+        {
+          "code": "to",
+          "title": "Tipped Over",
+          "type": "boolean",
+          "defaultValue": false,
+          "required": false
+        },
+        {
+          "code": "cf",
+          "title": "Yellow/Red Card",
+          "type": "boolean",
+          "defaultValue": false,
+          "required": false
+        },
+        {
+          "code": "co",
+          "title": "Comments",
           "type": "text",
-          "required": false,
-          "code": "scouter",
-          "formResetBehavior": "preserve",
-          "defaultValue": ""
-        },
-        {
-          "title": "Match Number",
-          "description": "Enter the match number.",
-          "type": "number",
-          "required": true,
-          "code": "matchNumber",
-          "formResetBehavior": "increment",
-          "defaultValue": 1
-        },
-        {
-          "title": "Alliance",
-          "description": "The Alliance you are scouting this match, based on color.",
-          "type": "select",
-          "required": true,
-          "code": "robot",
-          "formResetBehavior": "preserve",
-          "defaultValue": "R",
-          "choices": {
-            "R": "Red",
-            "B": "Blue"
-          }
-        },
-        {
-          "title": "Team Number One",
-          "description": "The team number of the first robot in the alliance you are scouting.",
-          "type": "number",
-          "required": true,
-          "code": "teamNumber1",
-          "formResetBehavior": "reset",
-          "defaultValue": 0,
           "min": 0,
-          "max": 19999
-        },
-        {
-          "title": "Team Number Two",
-          "description": "The team number of the second robot in the alliance you are scouting.",
-          "type": "number",
-          "required": true,
-          "code": "teamNumber2",
-          "formResetBehavior": "reset",
-          "defaultValue": 0,
-          "min": 0,
-          "max": 19999
-        },
-        {
-          "title": "Team Number Three",
-          "description": "The team number of the third robot in the alliance you are scouting.",
-          "type": "number",
-          "required": true,
-          "code": "teamNumber3",
-          "formResetBehavior": "reset",
-          "defaultValue": 0,
-          "min": 0,
-          "max": 19999
-        }
-      ]
-    },
-    {
-      "name": "Team Number One",
-      "fields": [
-        {
-          "title": "Maneuveraility",
-          "type": "range",
-          "required": false,
-          "code": "M1",
-          "formResetBehavior": "reset",
-          "defaultValue": 3,
-          "min": 1,
-          "max": 5,
-          "step": 1
-        },
-        {
-          "title": "Defense Ability",
-          "type": "range",
-          "required": false,
-          "code": "D1",
-          "formResetBehavior": "reset",
-          "defaultValue": 3,
-          "min": 1,
-          "max": 5,
-          "step": 1
-        },
-        {
-          "title": "Algae Ability",
-          "type": "range",
-          "required": false,
-          "code": "A1",
-          "formResetBehavior": "reset",
-          "defaultValue": 3,
-          "min": 1,
-          "max": 5,
-          "step": 1
-        },
-        {
-          "title": "Coral Ability",
-          "type": "range",
-          "required": false,
-          "code": "C1",
-          "formResetBehavior": "reset",
-          "defaultValue": 3,
-          "min": 1,
-          "max": 5,
-          "step": 1
-        },
-        {
-          "title": "Drive Team Ability",
-          "type": "range",
-          "required": false,
-          "code": "T1",
-          "formResetBehavior": "reset",
-          "defaultValue": 3,
-          "min": 1,
-          "max": 5,
-          "step": 1
-        },
-        {
-          "title": "Auto Ability",
-          "type": "range",
-          "required": false,
-          "code": "D1",
-          "formResetBehavior": "reset",
-          "defaultValue": 3,
-          "min": 1,
-          "max": 5,
-          "step": 1
-        }
-      ]
-    },
-    {
-      "name": "Team Number Two",
-      "fields": [
-        {
-          "title": "Maneuveraility",
-          "type": "range",
-          "required": false,
-          "code": "M2",
-          "formResetBehavior": "reset",
-          "defaultValue": 3,
-          "min": 1,
-          "max": 5,
-          "step": 1
-        },
-        {
-          "title": "Defense Ability",
-          "type": "range",
-          "required": false,
-          "code": "D2",
-          "formResetBehavior": "reset",
-          "defaultValue": 3,
-          "min": 1,
-          "max": 5,
-          "step": 1
-        },
-        {
-          "title": "Algae Ability",
-          "type": "range",
-          "required": false,
-          "code": "A2",
-          "formResetBehavior": "reset",
-          "defaultValue": 3,
-          "min": 1,
-          "max": 5,
-          "step": 1
-        },
-        {
-          "title": "Coral Ability",
-          "type": "range",
-          "required": false,
-          "code": "C2",
-          "formResetBehavior": "reset",
-          "defaultValue": 3,
-          "min": 1,
-          "max": 5,
-          "step": 1
-        },
-        {
-          "title": "Drive Team Ability",
-          "type": "range",
-          "required": false,
-          "code": "T2",
-          "formResetBehavior": "reset",
-          "defaultValue": 3,
-          "min": 1,
-          "max": 5,
-          "step": 1
-        },
-        {
-          "title": "Auto Ability",
-          "type": "range",
-          "required": false,
-          "code": "D2",
-          "formResetBehavior": "reset",
-          "defaultValue": 3,
-          "min": 1,
-          "max": 5,
-          "step": 1
-        }
-      ]
-    },
-    {
-      "name": "Team Number Three",
-      "fields": [
-        {
-          "title": "Maneuveraility",
-          "type": "range",
-          "required": false,
-          "code": "M3",
-          "formResetBehavior": "reset",
-          "defaultValue": 3,
-          "min": 1,
-          "max": 5,
-          "step": 1
-        },
-        {
-          "title": "Defense Ability",
-          "type": "range",
-          "required": false,
-          "code": "D3",
-          "formResetBehavior": "reset",
-          "defaultValue": 3,
-          "min": 1,
-          "max": 5,
-          "step": 1
-        },
-        {
-          "title": "Algae Ability",
-          "type": "range",
-          "required": false,
-          "code": "A3",
-          "formResetBehavior": "reset",
-          "defaultValue": 3,
-          "min": 1,
-          "max": 5,
-          "step": 1
-        },
-        {
-          "title": "Coral Ability",
-          "type": "range",
-          "required": false,
-          "code": "C3",
-          "formResetBehavior": "reset",
-          "defaultValue": 3,
-          "min": 1,
-          "max": 5,
-          "step": 1
-        },
-        {
-          "title": "Drive Team Ability",
-          "type": "range",
-          "required": false,
-          "code": "T3",
-          "formResetBehavior": "reset",
-          "defaultValue": 3,
-          "min": 1,
-          "max": 5,
-          "step": 1
-        },
-        {
-          "title": "Auto Ability",
-          "type": "range",
-          "required": false,
-          "code": "D3",
-          "formResetBehavior": "reset",
-          "defaultValue": 3,
-          "min": 1,
-          "max": 5,
-          "step": 1
+          "max": 50,
+          "defaultValue": "",
+          "required": false
         }
       ]
     }
